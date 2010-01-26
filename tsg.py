@@ -20,8 +20,9 @@ def filldict(path):
 	repo = Repo(path)
 	for commit in repo.commits(max_count = repo.commit_count()):
 		match = gitsvnrn.search(commit.message)
-		revnum = 'r' + match.group(1)
-		svndict[revnum] = commit.id
+		if match != None:
+			revnum = 'r' + match.group(1)
+			svndict[revnum] = commit.id
 	return svndict
 
 # Replace all SVN revisions with GIT commit hashes
